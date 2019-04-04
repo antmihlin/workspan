@@ -1,0 +1,43 @@
+<div *ngIf="question" class="mat-typography">
+	<div>
+		<a [routerLink]="['/question']">
+			<button mat-button >
+				<mat-icon >arrow_back</mat-icon>
+			</button>
+		</a>
+	</div>
+
+	<mat-card class="example-card">
+		<mat-card-header>
+			<mat-card-title>Question:</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<div [innerHtml]="question.text"></div>
+		</mat-card-content>
+		<mat-divider></mat-divider>
+		<mat-card-footer>
+			<button mat-button (click)="upvote()" [disabled]="upvoted">
+				Upvote <mat-icon >arrow_drop_up</mat-icon>
+			</button>
+			<span>{{ (question.upvotes  == undefined || question.upvotes == null )? ('0'):(question.upvotes)}}</span>
+			<button mat-button (click)="downvote()" [disabled]="downvoted">
+				Downvote <mat-icon >arrow_drop_down</mat-icon>
+			</button>
+			<span>{{(question.downvotes == undefined || question.downvotes == null)? ('0'):(question.downvotes)}}</span>
+		</mat-card-footer>
+	</mat-card>	
+
+	<div class="question-detail__answers" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-between">
+		<div>
+			<h2 fxFlexOffset="40px">Answers:</h2>
+		</div>
+		
+		<div>
+			<button  fxFlexOffset="40px" mat-raised-button color="accent" (click)="openDialog()">Add answer</button>
+		</div>
+		
+		<div fxFlex="100" *ngFor="let a of answers ">
+			 <app-answer [answer]="a"></app-answer>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container" fxLayout="row wrap"  fxLayout.xs="column wrap" fxLayoutGap="1%" fxLayoutAlign="space-between" >
+	<div class="question-card"  fxFlex.gt-xs="45" fxFlex.xs="100" fxFlex.gt-sm="31"  fxFlex.gt-md="20" *ngFor="let q of questions | reverse">
+		 <mat-card >
+			<mat-card-content>
+				<div [innerHtml]="(q.text.length>100)? (q.text | slice:0:100)+'...':(q.text)">	</div>
+			</mat-card-content>
+			 <mat-divider></mat-divider>
+			<mat-card-actions >
+				<div fxFlex="row" fxLayoutAlign="space-between">
+					<div fxFlex="50">
+						<a [routerLink]="['/question',q.id]">
+							<button mat-stroked-button color="accent" >Details</button>
+						</a>
+					</div>				
+					<div fxFlex="50" fxFlexAlign="right">
+						<span>
+							<mat-icon >arrow_drop_up</mat-icon>
+							{{ (q.upvotes  == undefined || q.upvotes == null )? ('0'):(q.upvotes)}}
+						</span>
+						<span>
+							<mat-icon >arrow_drop_down</mat-icon>
+							{{(q.downvotes == undefined || q.downvotes == null)? ('0'):(q.downvotes)}}
+						</span>	
+					</div>					
+				</div>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>

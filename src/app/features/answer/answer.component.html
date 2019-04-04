@@ -1,0 +1,35 @@
+<mat-card class="mat-elevation-z8" fxFlexOffset="40px" fxFlex="100" *ngIf="answer">
+	<mat-card-content>
+		<div [innerHtml]="answer.text"></div>
+	</mat-card-content>
+	<mat-divider></mat-divider>
+	<mat-card-actions>
+		<div fxFlex="row" fxLayoutAlign="space-between">
+			<div fxFlex="50">
+				<button mat-button (click)="upvote()" [disabled]="upvoted">
+					Upvote <mat-icon >arrow_drop_up</mat-icon>
+				</button>
+				<span>{{ (answer.upvotes  == undefined || answer.upvotes == null )? ('0'):(answer.upvotes)}}</span>
+				<button mat-button (click)="downvote()" [disabled]="downvoted">
+					Downvote <mat-icon >arrow_drop_down</mat-icon>
+				</button>
+				<span>{{(answer.downvotes == undefined || answer.downvotes == null)? ('0'):(answer.downvotes)}}</span>	
+			</div>
+			<div fxFlex="30" fxFlexAlign="right" fxFlex="row" fxLayoutAlign="flex-end" fxLayoutGap="10px">
+				<span>
+					<strong>Time:</strong>
+					<span *ngIf="answer.createdAt">{{answer.createdAt}}</span>
+				</span>	
+				<span>
+					<strong>User:</strong>
+					<span *ngIf="answer.createdBy.Name">{{answer.createdBy.Name}}</span>
+					<span *ngIf="answer.createdBy.Surname">{{answer.createdBy.Surname}}</span>
+					<span *ngIf="!answer.createdBy.Name || !answer.createdBy">Anonymus</span>
+				</span>	
+				<span *ngIf="answer.createdBy.Avatar" class="answer__avatar">
+					<img src="{{answer.createdBy.Avatar}}"/>
+				</span>				
+			</div>
+		</div>				
+	</mat-card-actions>
+</mat-card>
